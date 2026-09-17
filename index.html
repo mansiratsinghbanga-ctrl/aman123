@@ -1,0 +1,2898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amandeep Singh | Financial Services</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#020409;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* =========================================================
+   ANIMATED FINANCIAL BACKGROUND
+========================================================= */
+
+.market-bg{
+    position:fixed;
+    inset:0;
+    z-index:-10;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 35%,rgba(220,180,75,.08),transparent 35%),
+        radial-gradient(circle at 15% 80%,rgba(100,130,255,.035),transparent 30%),
+        #020409;
+}
+
+/* moving perspective grid */
+
+.grid{
+    position:absolute;
+    width:150%;
+    height:150%;
+    left:-25%;
+    top:-25%;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+
+    background-size:60px 60px;
+
+    transform:
+        perspective(650px)
+        rotateX(62deg);
+
+    animation:gridMove 10s linear infinite;
+}
+
+@keyframes gridMove{
+    from{
+        transform:
+            perspective(650px)
+            rotateX(62deg)
+            translateY(0);
+    }
+
+    to{
+        transform:
+            perspective(650px)
+            rotateX(62deg)
+            translateY(60px);
+    }
+}
+
+/* large chart */
+
+.big-chart{
+    position:absolute;
+    width:115%;
+    height:70%;
+    left:-7%;
+    bottom:3%;
+
+    opacity:.38;
+
+    animation:
+        chartFloat 8s ease-in-out infinite;
+}
+
+@keyframes chartFloat{
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(12px,-8px);
+    }
+}
+
+.big-chart svg{
+    width:100%;
+    height:100%;
+}
+
+.chart-grid{
+    stroke:rgba(255,255,255,.035);
+    stroke-width:1;
+}
+
+.glow-line{
+    fill:none;
+    stroke:#e4bd5e;
+    stroke-width:13;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    opacity:.12;
+    filter:blur(9px);
+
+    stroke-dasharray:2800;
+    stroke-dashoffset:2800;
+
+    animation:
+        drawChart 7s ease-out forwards,
+        glowLine 3s ease-in-out infinite 7s;
+}
+
+.main-line{
+    fill:none;
+    stroke:url(#gold);
+    stroke-width:3;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+
+    stroke-dasharray:2800;
+    stroke-dashoffset:2800;
+
+    filter:
+        drop-shadow(0 0 7px rgba(238,201,107,.65));
+
+    animation:
+        drawChart 7s ease-out forwards,
+        linePulse 3s ease-in-out infinite 7s;
+}
+
+@keyframes drawChart{
+    to{
+        stroke-dashoffset:0;
+    }
+}
+
+@keyframes glowLine{
+    0%,100%{opacity:.08}
+    50%{opacity:.28}
+}
+
+@keyframes linePulse{
+    0%,100%{
+        filter:drop-shadow(0 0 5px rgba(238,201,107,.4));
+    }
+
+    50%{
+        filter:
+            drop-shadow(0 0 15px rgba(238,201,107,.95));
+    }
+}
+
+/* second chart */
+
+.second-chart{
+    position:absolute;
+    width:100%;
+    height:300px;
+    top:12%;
+    left:0;
+
+    opacity:.12;
+
+    animation:
+        secondMove 9s ease-in-out infinite;
+}
+
+.second-chart svg{
+    width:100%;
+    height:100%;
+}
+
+.second-chart polyline{
+    fill:none;
+    stroke:#cfa84e;
+    stroke-width:2;
+
+    stroke-dasharray:1000;
+    stroke-dashoffset:1000;
+
+    filter:
+        drop-shadow(0 0 8px rgba(220,185,85,.7));
+
+    animation:
+        secondDraw 6s ease forwards,
+        secondGlow 3s ease-in-out infinite 6s;
+}
+
+@keyframes secondDraw{
+    to{
+        stroke-dashoffset:0;
+    }
+}
+
+@keyframes secondMove{
+    0%,100%{
+        transform:translateX(-15px) translateY(0);
+    }
+
+    50%{
+        transform:translateX(15px) translateY(-12px);
+    }
+}
+
+@keyframes secondGlow{
+    0%,100%{opacity:.45}
+    50%{opacity:1}
+}
+
+/* candlesticks */
+
+.candles{
+    position:absolute;
+    inset:0;
+    opacity:.13;
+}
+
+.candle{
+    position:absolute;
+    bottom:10%;
+    width:5px;
+    border-radius:5px;
+
+    background:
+        linear-gradient(#f4d47b,rgba(244,212,123,.15));
+
+    box-shadow:
+        0 0 10px rgba(239,202,106,.45);
+
+    animation:candleFloat 4s ease-in-out infinite;
+}
+
+.candle:before,
+.candle:after{
+    content:"";
+    position:absolute;
+    width:2px;
+    left:1px;
+    background:#e1bb5e;
+}
+
+.candle:before{
+    top:-25px;
+    height:23px;
+}
+
+.candle:after{
+    bottom:-20px;
+    height:18px;
+}
+
+.c1{left:6%;height:50px}
+.c2{left:14%;height:85px;animation-delay:.5s}
+.c3{left:23%;height:55px;animation-delay:1s}
+.c4{left:34%;height:110px;animation-delay:1.5s}
+.c5{left:46%;height:70px;animation-delay:2s}
+.c6{left:58%;height:135px;animation-delay:2.5s}
+.c7{left:70%;height:90px;animation-delay:3s}
+.c8{left:82%;height:150px;animation-delay:3.5s}
+.c9{left:94%;height:120px;animation-delay:4s}
+
+@keyframes candleFloat{
+    0%,100%{
+        transform:translateY(0) scaleY(1);
+    }
+
+    50%{
+        transform:translateY(-17px) scaleY(1.12);
+    }
+}
+
+/* glowing data particles */
+
+.data{
+    position:absolute;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+
+    background:#ffe49a;
+
+    box-shadow:
+        0 0 10px #ffe49a,
+        0 0 25px rgba(255,215,110,.7);
+
+    animation:dataMove 4s ease-in-out infinite;
+}
+
+.d1{left:15%;top:30%}
+.d2{left:31%;top:54%;animation-delay:.8s}
+.d3{left:48%;top:24%;animation-delay:1.4s}
+.d4{left:67%;top:43%;animation-delay:2s}
+.d5{left:82%;top:20%;animation-delay:2.7s}
+.d6{left:91%;top:63%;animation-delay:3.2s}
+
+@keyframes dataMove{
+    0%,100%{
+        transform:translateY(10px) scale(.6);
+        opacity:.2;
+    }
+
+    50%{
+        transform:translateY(-15px) scale(1.3);
+        opacity:1;
+    }
+}
+
+/* moving light */
+
+.bg-light{
+    position:absolute;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+
+    background:
+        radial-gradient(circle,
+        rgba(224,185,88,.11),
+        transparent 68%);
+
+    filter:blur(20px);
+
+    animation:bgLight 14s ease-in-out infinite;
+}
+
+@keyframes bgLight{
+    0%{
+        left:-15%;
+        top:20%;
+    }
+
+    35%{
+        left:30%;
+        top:50%;
+    }
+
+    70%{
+        left:65%;
+        top:15%;
+    }
+
+    100%{
+        left:110%;
+        top:55%;
+    }
+}
+
+/* floating market numbers */
+
+.market-number{
+    position:absolute;
+    color:#dfbb63;
+    font-size:10px;
+    letter-spacing:1px;
+    opacity:.18;
+
+    text-shadow:
+        0 0 10px rgba(230,190,90,.8);
+
+    animation:numberFloat 7s ease-in-out infinite;
+}
+
+.n1{left:8%;top:24%}
+.n2{left:25%;top:67%;animation-delay:1s}
+.n3{left:55%;top:18%;animation-delay:2s}
+.n4{left:76%;top:61%;animation-delay:3s}
+.n5{left:88%;top:30%;animation-delay:4s}
+
+@keyframes numberFloat{
+    0%,100%{
+        transform:translateY(15px);
+        opacity:.07;
+    }
+
+    50%{
+        transform:translateY(-18px);
+        opacity:.3;
+    }
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+
+    padding:14px 6%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:rgba(2,4,9,.70);
+    backdrop-filter:blur(22px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
+}
+
+/* =========================================================
+   CIRCULAR ANIMATED AS LOGO
+========================================================= */
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+
+    text-decoration:none;
+    color:white;
+}
+
+.logo{
+    width:55px;
+    height:55px;
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #fff3bd,
+            #e4bf65 38%,
+            #a97922 72%,
+            #53370c
+        );
+
+    color:#171208;
+
+    border:
+        2px solid rgba(255,226,143,.85);
+
+    font-size:17px;
+    font-weight:950;
+    letter-spacing:-1px;
+
+    box-shadow:
+        inset 2px 3px 8px rgba(255,255,255,.75),
+        inset -3px -4px 9px rgba(0,0,0,.35),
+        0 0 20px rgba(228,187,81,.3);
+
+    animation:
+        logoPulse 2.5s ease-in-out infinite;
+}
+
+/* rotating ring */
+
+.logo::before{
+    content:"";
+
+    position:absolute;
+    inset:-7px;
+
+    border-radius:50%;
+
+    border:
+        1px solid rgba(255,226,140,.5);
+
+    border-top-color:#ffe99b;
+    border-right-color:transparent;
+
+    animation:
+        logoRotate 3s linear infinite;
+}
+
+/* outer glow */
+
+.logo::after{
+    content:"";
+
+    position:absolute;
+    inset:-12px;
+
+    border-radius:50%;
+
+    border:
+        1px solid rgba(228,187,81,.14);
+
+    box-shadow:
+        0 0 20px rgba(228,187,81,.22);
+
+    animation:
+        outerPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes logoPulse{
+    0%,100%{
+        transform:scale(1);
+        box-shadow:
+            inset 2px 3px 8px rgba(255,255,255,.75),
+            inset -3px -4px 9px rgba(0,0,0,.35),
+            0 0 16px rgba(228,187,81,.2);
+    }
+
+    50%{
+        transform:scale(1.07);
+        box-shadow:
+            inset 2px 3px 8px rgba(255,255,255,.75),
+            inset -3px -4px 9px rgba(0,0,0,.35),
+            0 0 32px rgba(228,187,81,.65),
+            0 0 60px rgba(228,187,81,.15);
+    }
+}
+
+@keyframes logoRotate{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(360deg)}
+}
+
+@keyframes outerPulse{
+    0%,100%{
+        transform:scale(.96);
+        opacity:.3;
+    }
+
+    50%{
+        transform:scale(1.1);
+        opacity:.9;
+    }
+}
+
+.logo-text{
+    position:relative;
+    z-index:3;
+
+    text-shadow:
+        0 1px 2px rgba(255,255,255,.6);
+}
+
+.logo-arrow{
+    position:absolute;
+    z-index:4;
+
+    right:6px;
+    bottom:5px;
+
+    color:#fff6c9;
+
+    font-size:12px;
+    font-weight:900;
+
+    text-shadow:
+        0 0 8px rgba(255,226,140,.95);
+
+    animation:
+        arrowMove 1.5s ease-in-out infinite;
+}
+
+@keyframes arrowMove{
+    0%,100%{
+        transform:translate(0,2px) scale(.8);
+        opacity:.5;
+    }
+
+    50%{
+        transform:translate(2px,-2px) scale(1.2);
+        opacity:1;
+    }
+}
+
+.brand-name{
+    font-size:15px;
+    font-weight:800;
+}
+
+.brand-sub{
+    color:#999da8;
+    font-size:9px;
+    letter-spacing:1.5px;
+    margin-top:4px;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:#b6bac4;
+    text-decoration:none;
+    font-size:13px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#f2d27a;
+}
+
+.nav-btn{
+    text-decoration:none;
+    color:#171208;
+
+    padding:11px 19px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(135deg,#ffe99f,#c89428);
+
+    font-size:12px;
+    font-weight:800;
+
+    transition:.3s;
+}
+
+.nav-btn:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 12px 30px rgba(220,174,63,.25);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+
+    padding:
+        155px 7%
+        90px;
+
+    display:flex;
+    align-items:center;
+}
+
+.hero-container{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:70px;
+
+    align-items:center;
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    border:
+        1px solid rgba(228,188,88,.25);
+
+    background:
+        rgba(228,188,88,.055);
+
+    color:#e6c36c;
+
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+
+    margin-bottom:25px;
+}
+
+.badge i{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+
+    background:#61e68b;
+
+    box-shadow:
+        0 0 12px #61e68b;
+
+    animation:status 1.6s infinite;
+}
+
+@keyframes status{
+    0%,100%{
+        transform:scale(1);
+        opacity:.5;
+    }
+
+    50%{
+        transform:scale(1.5);
+        opacity:1;
+    }
+}
+
+.hero h1{
+    font-size:clamp(48px,6.5vw,82px);
+    line-height:.98;
+    letter-spacing:-4px;
+    margin-bottom:25px;
+}
+
+.hero h1 span{
+    display:block;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #e5c36d,
+            #fff
+        );
+
+    background-size:200%;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    animation:titleShine 5s linear infinite;
+}
+
+@keyframes titleShine{
+    to{
+        background-position:200%;
+    }
+}
+
+.hero-description{
+    max-width:590px;
+
+    color:#999da8;
+
+    font-size:15px;
+    line-height:1.85;
+
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.btn{
+    padding:14px 20px;
+
+    border-radius:13px;
+
+    text-decoration:none;
+
+    font-size:12px;
+    font-weight:800;
+
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    transition:.3s;
+}
+
+.btn-primary{
+    color:#171208;
+
+    background:
+        linear-gradient(135deg,#ffe99f,#c79327);
+
+    box-shadow:
+        0 10px 30px rgba(220,175,65,.14);
+}
+
+.btn-primary:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 18px 40px rgba(220,175,65,.28);
+}
+
+.btn-secondary{
+    color:white;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+}
+
+.btn-secondary:hover{
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.09);
+}
+
+
+/* =========================================================
+   HERO FINANCIAL CARD
+========================================================= */
+
+.visual{
+    height:480px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    perspective:1200px;
+}
+
+.finance-card{
+    width:370px;
+
+    padding:29px;
+
+    position:relative;
+
+    border-radius:29px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.105),
+            rgba(255,255,255,.025)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.14);
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.55);
+
+    animation:cardFloat 5s ease-in-out infinite;
+}
+
+@keyframes cardFloat{
+    0%,100%{
+        transform:
+            perspective(1000px)
+            rotateY(-7deg)
+            rotateX(3deg)
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            perspective(1000px)
+            rotateY(-3deg)
+            rotateX(1deg)
+            translateY(-12px);
+    }
+}
+
+.finance-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:190px;
+    height:190px;
+
+    right:-80px;
+    top:-80px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(231,192,94,.18),
+            transparent 68%
+        );
+
+    filter:blur(8px);
+
+    animation:cardLight 4s infinite;
+}
+
+@keyframes cardLight{
+    0%,100%{
+        transform:scale(.8);
+        opacity:.35;
+    }
+
+    50%{
+        transform:scale(1.25);
+        opacity:1;
+    }
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:23px;
+}
+
+.card-label{
+    color:#999da8;
+    font-size:12px;
+}
+
+.available{
+    color:#65df8d;
+    font-size:10px;
+}
+
+.card-logo{
+    width:68px;
+    height:68px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(circle at 35% 25%,
+        #fff1b7,
+        #dcae49 50%,
+        #8b6218);
+
+    color:#171208;
+
+    font-size:22px;
+    font-weight:950;
+
+    border:
+        2px solid rgba(255,229,154,.7);
+
+    margin-bottom:17px;
+
+    box-shadow:
+        0 0 25px rgba(228,188,87,.25);
+
+    animation:smallLogo 2.4s infinite;
+}
+
+@keyframes smallLogo{
+    0%,100%{
+        box-shadow:0 0 16px rgba(228,188,87,.18);
+    }
+
+    50%{
+        box-shadow:
+            0 0 35px rgba(228,188,87,.48);
+    }
+}
+
+.finance-card h2{
+    font-size:25px;
+    margin-bottom:5px;
+}
+
+.role{
+    color:#d8b65d;
+    font-size:10px;
+    letter-spacing:1.5px;
+}
+
+/* mini chart */
+
+.mini-chart{
+    height:120px;
+    margin:23px 0 20px;
+    overflow:hidden;
+}
+
+.mini-chart svg{
+    width:100%;
+    height:100%;
+}
+
+.mini-grid{
+    stroke:rgba(255,255,255,.05);
+    stroke-width:1;
+}
+
+.mini-line{
+    fill:none;
+
+    stroke:#e2c36e;
+
+    stroke-width:3;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+
+    stroke-dasharray:700;
+    stroke-dashoffset:700;
+
+    filter:
+        drop-shadow(0 0 7px rgba(226,195,110,.7));
+
+    animation:
+        miniDraw 3s ease forwards,
+        miniGlow 2.5s ease-in-out infinite 3s;
+}
+
+@keyframes miniDraw{
+    to{
+        stroke-dashoffset:0;
+    }
+}
+
+@keyframes miniGlow{
+    0%,100%{
+        filter:
+            drop-shadow(0 0 4px rgba(226,195,110,.4));
+    }
+
+    50%{
+        filter:
+            drop-shadow(0 0 13px rgba(226,195,110,.95));
+    }
+}
+
+.mini-dot{
+    fill:#ffe28c;
+
+    filter:
+        drop-shadow(0 0 7px #ffe28c);
+
+    animation:dotPulse 1.5s infinite;
+}
+
+@keyframes dotPulse{
+    0%,100%{
+        opacity:.35;
+        r:3;
+    }
+
+    50%{
+        opacity:1;
+        r:6;
+    }
+}
+
+.card-items{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+}
+
+.card-item{
+    padding:11px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    color:#c1c4cc;
+
+    font-size:10px;
+
+    transition:.3s;
+}
+
+.card-item:hover{
+    border-color:rgba(230,190,87,.35);
+    box-shadow:
+        0 0 18px rgba(230,190,87,.08);
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section{
+    padding:105px 7%;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    max-width:700px;
+    margin:0 auto 55px;
+}
+
+.section-title small{
+    color:#dcb65d;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+.section-title h2{
+    font-size:clamp(35px,5vw,55px);
+    letter-spacing:-2px;
+    margin:12px 0 14px;
+}
+
+.section-title p{
+    color:#90949f;
+    font-size:14px;
+    line-height:1.7;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+}
+
+.service{
+    min-height:235px;
+
+    padding:24px 20px;
+
+    border-radius:22px;
+
+    position:relative;
+    overflow:hidden;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.025)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    transition:
+        .4s cubic-bezier(.2,.8,.2,1);
+}
+
+.service::before{
+    content:"";
+
+    position:absolute;
+
+    width:140px;
+    height:140px;
+
+    top:-75px;
+    right:-65px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(224,185,91,.19),
+            transparent 70%
+        );
+
+    transition:.4s;
+}
+
+.service:hover{
+    transform:translateY(-10px);
+
+    border-color:
+        rgba(226,190,96,.38);
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.4),
+        0 0 25px rgba(226,190,96,.08);
+}
+
+.service:hover::before{
+    transform:scale(1.5);
+}
+
+.service-icon{
+    width:51px;
+    height:51px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:
+        rgba(224,185,91,.08);
+
+    border:
+        1px solid rgba(224,185,91,.14);
+
+    font-size:21px;
+
+    margin-bottom:20px;
+
+    transition:.3s;
+}
+
+.service:hover .service-icon{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 23px rgba(224,185,91,.2);
+}
+
+.service h3{
+    font-size:16px;
+    margin-bottom:10px;
+}
+
+.service p{
+    color:#8d919c;
+    font-size:12px;
+    line-height:1.65;
+}
+
+.click-text{
+    position:absolute;
+    left:20px;
+    bottom:16px;
+
+    color:#6e6859;
+
+    font-size:8px;
+    letter-spacing:1.3px;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+.about-box{
+    padding:34px;
+
+    border-radius:25px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(255,255,255,.09);
+}
+
+.about-box h3{
+    font-size:24px;
+    margin-bottom:17px;
+}
+
+.about-box p{
+    color:#9296a1;
+    font-size:14px;
+    line-height:1.85;
+}
+
+.location{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    padding:17px 0;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
+}
+
+.location:last-child{
+    border-bottom:0;
+}
+
+.location-icon{
+    width:44px;
+    height:44px;
+
+    border-radius:13px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(224,185,91,.08);
+}
+
+.location strong{
+    display:block;
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.location span{
+    color:#8d919b;
+    font-size:12px;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-box{
+    text-align:center;
+
+    padding:75px 30px;
+
+    border-radius:30px;
+
+    border:
+        1px solid rgba(224,185,91,.18);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(224,185,91,.08),
+            transparent 60%
+        ),
+        rgba(255,255,255,.035);
+}
+
+.contact-box h2{
+    font-size:clamp(36px,5vw,58px);
+    letter-spacing:-2px;
+    margin-bottom:13px;
+}
+
+.contact-box p{
+    color:#8f939e;
+    font-size:14px;
+    margin-bottom:30px;
+}
+
+.contact-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:11px;
+}
+
+.contact-btn{
+    text-decoration:none;
+
+    color:#fff;
+
+    padding:13px 18px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    font-size:12px;
+    font-weight:700;
+
+    transition:.3s;
+}
+
+.contact-btn:hover{
+    transform:translateY(-3px);
+
+    border-color:
+        rgba(224,185,91,.38);
+
+    box-shadow:
+        0 0 20px rgba(224,185,91,.09);
+}
+
+.whatsapp{
+    border-color:
+        rgba(70,220,115,.3);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:30px 7%;
+
+    border-top:
+        1px solid rgba(255,255,255,.07);
+
+    color:#6e727c;
+
+    font-size:11px;
+}
+
+.footer-inner{
+    max-width:1200px;
+    margin:auto;
+
+    display:flex;
+    justify-content:space-between;
+}
+
+
+/* =========================================================
+   MODAL / SERVICE DETAILS
+========================================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    z-index:3000;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(0,0,0,.8);
+
+    backdrop-filter:blur(14px);
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-card{
+    width:100%;
+    max-width:650px;
+    max-height:88vh;
+
+    overflow:auto;
+
+    padding:35px;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #12151c,
+            #07090d
+        );
+
+    border:
+        1px solid rgba(224,185,91,.25);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.7);
+
+    animation:modalIn .35s ease;
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:translateY(25px) scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.close{
+    float:right;
+
+    width:36px;
+    height:36px;
+
+    border-radius:50%;
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    background:
+        rgba(255,255,255,.05);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:18px;
+}
+
+.modal-icon{
+    width:63px;
+    height:63px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:
+        rgba(224,185,91,.09);
+
+    font-size:27px;
+
+    margin-bottom:18px;
+}
+
+.modal-card h2{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.modal-intro{
+    color:#b0b4bd;
+    font-size:14px;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.modal-section{
+    margin-top:23px;
+}
+
+.modal-section h4{
+    color:#dfbd65;
+    font-size:11px;
+    letter-spacing:1.5px;
+    margin-bottom:9px;
+}
+
+.modal-section p,
+.modal-section li{
+    color:#9498a3;
+    font-size:13px;
+    line-height:1.75;
+}
+
+.modal-section ul{
+    padding-left:18px;
+}
+
+.note{
+    margin-top:25px;
+
+    padding:15px;
+
+    border-radius:13px;
+
+    background:
+        rgba(224,185,91,.055);
+
+    border:
+        1px solid rgba(224,185,91,.12);
+
+    color:#aaaeb8;
+
+    font-size:11px;
+    line-height:1.6;
+}
+
+.modal-whatsapp{
+    display:inline-flex;
+
+    margin-top:24px;
+
+    padding:13px 20px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    color:#171208;
+
+    background:
+        linear-gradient(135deg,#ffe89d,#c79327);
+
+    font-size:12px;
+    font-weight:800;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero-container{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero-description{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .visual{
+        height:420px;
+    }
+
+    .services{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .navbar{
+        padding:13px 5%;
+    }
+
+    .nav-btn{
+        display:none;
+    }
+
+    .hero{
+        padding:
+            125px 5%
+            60px;
+    }
+
+    .hero h1{
+        font-size:47px;
+        letter-spacing:-2.5px;
+    }
+
+    .hero-description{
+        font-size:14px;
+    }
+
+    .visual{
+        height:390px;
+        transform:scale(.86);
+        margin-top:-20px;
+    }
+
+    .finance-card{
+        width:340px;
+    }
+
+    section{
+        padding:75px 5%;
+    }
+
+    .services{
+        grid-template-columns:1fr;
+    }
+
+    .about-box{
+        padding:25px;
+    }
+
+    .contact-box{
+        padding:55px 20px;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        gap:8px;
+        text-align:center;
+    }
+
+    .modal-card{
+        padding:25px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- =========================================================
+     MOVING BACKGROUND
+========================================================= -->
+
+<div class="market-bg">
+
+    <div class="grid"></div>
+
+    <div class="bg-light"></div>
+
+    <div class="candles">
+        <div class="candle c1"></div>
+        <div class="candle c2"></div>
+        <div class="candle c3"></div>
+        <div class="candle c4"></div>
+        <div class="candle c5"></div>
+        <div class="candle c6"></div>
+        <div class="candle c7"></div>
+        <div class="candle c8"></div>
+        <div class="candle c9"></div>
+    </div>
+
+    <div class="data d1"></div>
+    <div class="data d2"></div>
+    <div class="data d3"></div>
+    <div class="data d4"></div>
+    <div class="data d5"></div>
+    <div class="data d6"></div>
+
+    <div class="market-number n1">+12.48%</div>
+    <div class="market-number n2">+8.72%</div>
+    <div class="market-number n3">+15.31%</div>
+    <div class="market-number n4">24.86</div>
+    <div class="market-number n5">↑ GROWTH</div>
+
+
+    <!-- MAIN MARKET CHART -->
+
+    <div class="big-chart">
+
+        <svg viewBox="0 0 1800 720"
+             preserveAspectRatio="none">
+
+            <defs>
+
+                <linearGradient
+                    id="gold"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%">
+
+                    <stop offset="0%" stop-color="#92702a"/>
+                    <stop offset="45%" stop-color="#ffe18a"/>
+                    <stop offset="75%" stop-color="#d8ad4c"/>
+                    <stop offset="100%" stop-color="#fff0ae"/>
+
+                </linearGradient>
+
+            </defs>
+
+
+            <g class="chart-grid">
+
+                <line x1="0" y1="120" x2="1800" y2="120"/>
+                <line x1="0" y1="240" x2="1800" y2="240"/>
+                <line x1="0" y1="360" x2="1800" y2="360"/>
+                <line x1="0" y1="480" x2="1800" y2="480"/>
+                <line x1="0" y1="600" x2="1800" y2="600"/>
+
+            </g>
+
+
+            <polyline
+                class="glow-line"
+                points="
+                0,590
+                70,565
+                135,580
+                205,525
+                275,550
+                350,470
+                420,505
+                495,425
+                565,455
+                640,375
+                710,400
+                790,330
+                860,355
+                940,275
+                1015,305
+                1090,245
+                1165,275
+                1240,190
+                1310,225
+                1385,145
+                1460,180
+                1535,110
+                1610,145
+                1690,70
+                1800,100
+                "
+            />
+
+            <polyline
+                class="main-line"
+                points="
+                0,590
+                70,565
+                135,580
+                205,525
+                275,550
+                350,470
+                420,505
+                495,425
+                565,455
+                640,375
+                710,400
+                790,330
+                860,355
+                940,275
+                1015,305
+                1090,245
+                1165,275
+                1240,190
+                1310,225
+                1385,145
+                1460,180
+                1535,110
+                1610,145
+                1690,70
+                1800,100
+                "
+            />
+
+        </svg>
+
+    </div>
+
+
+    <!-- SECOND FLUCTUATING CHART -->
+
+    <div class="second-chart">
+
+        <svg viewBox="0 0 1200 300"
+             preserveAspectRatio="none">
+
+            <polyline
+                points="
+                0,230
+                80,245
+                150,205
+                220,220
+                290,175
+                360,195
+                430,145
+                500,165
+                570,120
+                650,145
+                720,95
+                800,115
+                880,72
+                960,95
+                1040,48
+                1120,70
+                1200,35
+                "
+            />
+
+        </svg>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar">
+
+    <a href="#home" class="brand">
+
+        <div class="logo">
+
+            <span class="logo-text">AS</span>
+
+            <span class="logo-arrow">↗</span>
+
+        </div>
+
+        <div>
+
+            <div class="brand-name">
+                Amandeep Singh
+            </div>
+
+            <div class="brand-sub">
+                FINANCIAL SERVICES
+            </div>
+
+        </div>
+
+    </a>
+
+
+    <ul class="nav-links">
+
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+
+    </ul>
+
+
+    <a href="#contact" class="nav-btn">
+        Get in Touch
+    </a>
+
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-container">
+
+
+        <div class="reveal">
+
+            <div class="badge">
+
+                <i></i>
+
+                Financial Protection & Planning
+
+            </div>
+
+
+            <h1>
+
+                Plan Today.
+
+                <span>
+                    Grow Tomorrow.
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Welcome to Amandeep Singh's financial
+                services platform. Explore insurance,
+                savings and investment solutions designed
+                around your financial needs.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#services"
+                    class="btn btn-primary">
+
+                    Explore Services →
+
+                </a>
+
+
+                <a
+                    href="https://wa.me/917084070809?text=Hello%20Amandeep%20Singh%20Ji%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20know%20more%20about%20your%20services."
+                    target="_blank"
+                    class="btn btn-secondary">
+
+                    💬 WhatsApp
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- FINANCIAL CARD -->
+
+        <div class="visual reveal">
+
+            <div class="finance-card">
+
+                <div class="card-top">
+
+                    <div class="card-label">
+                        Financial Solutions
+                    </div>
+
+                    <div class="available">
+                        ● Available
+                    </div>
+
+                </div>
+
+
+                <div class="card-logo">
+                    AS
+                </div>
+
+
+                <h2>
+                    Amandeep Singh
+                </h2>
+
+                <div class="role">
+                    FINANCIAL SERVICES
+                </div>
+
+
+                <!-- MINI LIVE CHART -->
+
+                <div class="mini-chart">
+
+                    <svg
+                        viewBox="0 0 500 130"
+                        preserveAspectRatio="none">
+
+                        <g class="mini-grid">
+
+                            <line x1="0" y1="30" x2="500" y2="30"/>
+                            <line x1="0" y1="65" x2="500" y2="65"/>
+                            <line x1="0" y1="100" x2="500" y2="100"/>
+
+                        </g>
+
+
+                        <polyline
+                            class="mini-line"
+                            points="
+                            0,112
+                            35,104
+                            65,108
+                            95,92
+                            125,100
+                            155,75
+                            190,84
+                            225,62
+                            260,70
+                            300,48
+                            335,58
+                            370,35
+                            405,42
+                            445,19
+                            500,8
+                            "
+                        />
+
+                        <circle
+                            class="mini-dot"
+                            cx="125"
+                            cy="100"
+                            r="4"/>
+
+                        <circle
+                            class="mini-dot"
+                            cx="260"
+                            cy="70"
+                            r="4"/>
+
+                        <circle
+                            class="mini-dot"
+                            cx="405"
+                            cy="42"
+                            r="4"/>
+
+                    </svg>
+
+                </div>
+
+
+                <div class="card-items">
+
+                    <div class="card-item">
+                        🛡️ Life Insurance
+                    </div>
+
+                    <div class="card-item">
+                        ❤️ Health Insurance
+                    </div>
+
+                    <div class="card-item">
+                        🏦 FD & RD
+                    </div>
+
+                    <div class="card-item">
+                        📈 Mutual Fund
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SERVICES
+========================================================= -->
+
+<section id="services">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <small>
+                Our Services
+            </small>
+
+            <h2>
+                Financial Solutions,
+                Clearly Explained.
+            </h2>
+
+            <p>
+                Select any service to understand what it is,
+                why it can matter and how professional guidance
+                can help.
+            </p>
+
+        </div>
+
+
+        <div class="services">
+
+
+            <div
+                class="service reveal"
+                onclick="openService('life')">
+
+                <div class="service-icon">
+                    🛡️
+                </div>
+
+                <h3>
+                    Life Insurance
+                </h3>
+
+                <p>
+                    Financial protection for your
+                    family and long-term security.
+                </p>
+
+                <div class="click-text">
+                    CLICK TO EXPLORE
+                </div>
+
+            </div>
+
+
+            <div
+                class="service reveal"
+                onclick="openService('health')">
+
+                <div class="service-icon">
+                    ❤️
+                </div>
+
+                <h3>
+                    Health Insurance
+                </h3>
+
+                <p>
+                    Protection against unexpected
+                    healthcare expenses.
+                </p>
+
+                <div class="click-text">
+                    CLICK TO EXPLORE
+                </div>
+
+            </div>
+
+
+            <div
+                class="service reveal"
+                onclick="openService('fd')">
+
+                <div class="service-icon">
+                    🏦
+                </div>
+
+                <h3>
+                    FD & RD
+                </h3>
+
+                <p>
+                    Structured saving options
+                    for planned financial goals.
+                </p>
+
+                <div class="click-text">
+                    CLICK TO EXPLORE
+                </div>
+
+            </div>
+
+
+            <div
+                class="service reveal"
+                onclick="openService('general')">
+
+                <div class="service-icon">
+                    🔐
+                </div>
+
+                <h3>
+                    General Insurance
+                </h3>
+
+                <p>
+                    Protection solutions for
+                    different everyday risks.
+                </p>
+
+                <div class="click-text">
+                    CLICK TO EXPLORE
+                </div>
+
+            </div>
+
+
+            <div
+                class="service reveal"
+                onclick="openService('mutual')">
+
+                <div class="service-icon">
+                    📈
+                </div>
+
+                <h3>
+                    Mutual Fund
+                </h3>
+
+                <p>
+                    Market-linked investment
+                    options and guidance.
+                </p>
+
+                <div class="click-text">
+                    CLICK TO EXPLORE
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<section id="about">
+
+    <div class="container">
+
+        <div class="section-title reveal">
+
+            <small>
+                About
+            </small>
+
+            <h2>
+                Amandeep Singh
+            </h2>
+
+            <p>
+                Financial services and investment assistance.
+            </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+
+            <div class="about-box reveal">
+
+                <h3>
+                    Financial Guidance
+                </h3>
+
+                <p>
+
+                    Amandeep Singh provides assistance
+                    related to life insurance, health
+                    insurance, FD & RD, general insurance
+                    and mutual fund services.
+
+                    <br><br>
+
+                    The objective is to help clients
+                    understand available financial
+                    solutions and make informed decisions
+                    according to their individual needs.
+
+                </p>
+
+            </div>
+
+
+            <div class="about-box reveal">
+
+                <h3>
+                    Locations
+                </h3>
+
+
+                <div class="location">
+
+                    <div class="location-icon">
+                        🏢
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Office
+                        </strong>
+
+                        <span>
+                            Ratan Lal Nagar, Kanpur
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="location">
+
+                    <div class="location-icon">
+                        🏠
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Residence
+                        </strong>
+
+                        <span>
+                            Govind Nagar, Kanpur
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section id="contact">
+
+    <div class="container">
+
+        <div class="contact-box reveal">
+
+            <h2>
+                Let's Talk
+            </h2>
+
+            <p>
+                Connect directly through call,
+                email or WhatsApp.
+            </p>
+
+
+            <div class="contact-buttons">
+
+                <a
+                    class="contact-btn"
+                    href="tel:+917084070809">
+
+                    📞 7084070809
+
+                </a>
+
+
+                <a
+                    class="contact-btn"
+                    href="tel:+918299519286">
+
+                    📞 8299519286
+
+                </a>
+
+
+                <a
+                    class="contact-btn"
+                    href="mailto:amandeepsingh9044@gmail.com?subject=Financial%20Services%20Enquiry">
+
+                    ✉️ Email
+
+                </a>
+
+
+                <a
+                    class="contact-btn whatsapp"
+                    target="_blank"
+                    href="https://wa.me/917084070809?text=Hello%20Amandeep%20Singh%20Ji%2C%20I%20visited%20your%20website%20and%20would%20like%20to%20know%20more%20about%20your%20services.">
+
+                    💬 WhatsApp
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+            © <span id="year"></span>
+            Amandeep Singh
+        </div>
+
+        <div>
+            Kanpur, Uttar Pradesh
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     SERVICE MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="modal"
+    onclick="outsideModal(event)">
+
+    <div class="modal-card">
+
+        <button
+            class="close"
+            onclick="closeService()">
+            ×
+        </button>
+
+
+        <div
+            class="modal-icon"
+            id="modalIcon">
+            🛡️
+        </div>
+
+
+        <h2 id="modalTitle">
+            Life Insurance
+        </h2>
+
+
+        <p
+            class="modal-intro"
+            id="modalIntro">
+        </p>
+
+
+        <div class="modal-section">
+
+            <h4>
+                WHY IT MATTERS
+            </h4>
+
+            <p id="modalWhy"></p>
+
+        </div>
+
+
+        <div class="modal-section">
+
+            <h4>
+                HOW IT CAN HELP
+            </h4>
+
+            <ul id="modalHelp"></ul>
+
+        </div>
+
+
+        <div class="modal-section">
+
+            <h4>
+                PROFESSIONAL GUIDANCE
+            </h4>
+
+            <p id="modalGuide"></p>
+
+        </div>
+
+
+        <div class="note">
+
+            Financial products have different terms,
+            costs, risks and eligibility requirements.
+            Specific recommendations should be based
+            on the individual's financial situation and
+            applicable product documents.
+
+        </div>
+
+
+        <a
+            class="modal-whatsapp"
+            target="_blank"
+            href="https://wa.me/917084070809?text=Hello%20Amandeep%20Singh%20Ji%2C%20I%20would%20like%20to%20discuss%20your%20financial%20services.">
+
+            💬 Discuss This Service
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.getElementById("year").textContent =
+new Date().getFullYear();
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+document.querySelectorAll(".reveal");
+
+const observer =
+new IntersectionObserver(
+(entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("active");
+
+        }
+
+    });
+
+},
+{
+    threshold:.12
+});
+
+revealElements.forEach(element=>{
+    observer.observe(element);
+});
+
+
+/* =========================================================
+   SERVICE CONTENT
+========================================================= */
+
+const services = {
+
+    life:{
+        icon:"🛡️",
+        title:"Life Insurance",
+
+        intro:
+        "Life insurance is designed to provide financial protection to the policyholder's family or nominees according to the terms of the selected policy.",
+
+        why:
+        "For many families, the loss of an earning member can create a significant financial challenge. Life insurance can provide a financial benefit to eligible beneficiaries when policy conditions are met.",
+
+        help:[
+            "Provides financial protection for eligible beneficiaries.",
+            "Can support long-term financial planning.",
+            "Different policy types can serve different protection needs.",
+            "The appropriate cover depends on income, liabilities, goals and policy terms."
+        ],
+
+        guide:
+        "Professional guidance can help you understand policy features, coverage, premiums, exclusions and applicable conditions before choosing a product."
+    },
+
+
+    health:{
+        icon:"❤️",
+        title:"Health Insurance",
+
+        intro:
+        "Health insurance is designed to help cover eligible healthcare expenses according to the terms, limits and conditions of the selected policy.",
+
+        why:
+        "Medical treatment can create unexpected expenses. Health insurance can reduce the financial burden of eligible expenses covered by the policy.",
+
+        help:[
+            "Can provide financial support for eligible medical expenses.",
+            "May offer different coverage structures depending on the policy.",
+            "Can be part of an overall financial protection plan.",
+            "Policy limits, exclusions and waiting periods should be checked carefully."
+        ],
+
+        guide:
+        "Professional assistance can help explain coverage, exclusions, waiting periods, premiums and other important policy conditions."
+    },
+
+
+    fd:{
+        icon:"🏦",
+        title:"FD & RD",
+
+        intro:
+        "Fixed Deposits and Recurring Deposits are savings products offered by financial institutions under specific terms and interest structures.",
+
+        why:
+        "They can be useful for people looking for structured saving and predictable terms, depending on the product and institution.",
+
+        help:[
+            "FD can allow a lump sum to be placed for a defined period.",
+            "RD generally involves depositing a fixed amount periodically.",
+            "They can be used for planned savings goals.",
+            "Interest rates, tenure, withdrawal rules and taxation can vary."
+        ],
+
+        guide:
+        "Before choosing an FD or RD, compare tenure, interest rate, premature withdrawal conditions, applicable taxation and other terms."
+    },
+
+
+    general:{
+        icon:"🔐",
+        title:"General Insurance",
+
+        intro:
+        "General insurance covers various non-life risks through different types of insurance products.",
+
+        why:
+        "Unexpected damage, loss or liability can create financial pressure. Suitable insurance may provide protection against covered risks according to policy terms.",
+
+        help:[
+            "Different policies can address different risks.",
+            "Coverage may be available for assets, vehicles and other eligible needs.",
+            "Policies can have deductibles, exclusions and coverage limits.",
+            "The appropriate policy depends on the specific risk being insured."
+        ],
+
+        guide:
+        "Professional guidance can help explain coverage, exclusions, claim conditions, deductibles and other policy details."
+    },
+
+
+    mutual:{
+        icon:"📈",
+        title:"Mutual Fund",
+
+        intro:
+        "A mutual fund pools money from investors and invests it according to the objectives and strategy of the particular scheme.",
+
+        why:
+        "Mutual funds can be one way of participating in market-linked investments, but returns are not guaranteed and investments carry risk.",
+
+        help:[
+            "Different schemes can have different investment objectives.",
+            "Investments may provide diversification depending on the scheme.",
+            "SIP and lump-sum investment are common investment methods.",
+            "Risk, fees, time horizon and investment objective should be considered."
+        ],
+
+        guide:
+        "Professional guidance can help explain scheme objectives, risk level, costs, investment horizon and other relevant information before investing."
+    }
+
+};
+
+
+/* =========================================================
+   OPEN SERVICE
+========================================================= */
+
+function openService(type){
+
+    const data=services[type];
+
+    document.getElementById("modalIcon")
+        .textContent=data.icon;
+
+    document.getElementById("modalTitle")
+        .textContent=data.title;
+
+    document.getElementById("modalIntro")
+        .textContent=data.intro;
+
+    document.getElementById("modalWhy")
+        .textContent=data.why;
+
+    document.getElementById("modalGuide")
+        .textContent=data.guide;
+
+
+    const list=
+        document.getElementById("modalHelp");
+
+    list.innerHTML="";
+
+    data.help.forEach(item=>{
+
+        const li=
+            document.createElement("li");
+
+        li.textContent=item;
+
+        list.appendChild(li);
+
+    });
+
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+    document.body.style.overflow="hidden";
+}
+
+
+/* =========================================================
+   CLOSE SERVICE
+========================================================= */
+
+function closeService(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+    document.body.style.overflow="";
+}
+
+
+function outsideModal(event){
+
+    if(event.target.id==="modal"){
+        closeService();
+    }
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key==="Escape"){
+            closeService();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LIVE BACKGROUND MOVEMENT
+========================================================= */
+
+const bigChart =
+document.querySelector(".big-chart");
+
+let movement=0;
+
+function animateBackground(){
+
+    movement+=.018;
+
+    bigChart.style.transform=
+        `translateX(${Math.sin(movement)*10}px)
+         translateY(${Math.sin(movement*1.4)*5}px)`;
+
+    requestAnimationFrame(
+        animateBackground
+    );
+}
+
+animateBackground();
+
+
+/* =========================================================
+   3D CARD MOUSE EFFECT
+========================================================= */
+
+const card =
+document.querySelector(".finance-card");
+
+document.addEventListener(
+    "mousemove",
+    function(event){
+
+        if(window.innerWidth<900)
+            return;
+
+        const x=
+            (window.innerWidth/2-event.clientX)/80;
+
+        const y=
+            (window.innerHeight/2-event.clientY)/80;
+
+        card.style.transform=
+            `perspective(1000px)
+             rotateY(${-5-x}deg)
+             rotateX(${2+y}deg)`;
+
+    }
+);
+
+</script>
+
+</body>
+</html>
